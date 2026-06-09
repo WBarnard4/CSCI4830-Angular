@@ -10,7 +10,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "e2e": "ng e2e",
-    "github-build": "ng build --configuration production --base-href 'https://WBarnard4.github.io/CSCI4830-Angular/'"
+    "github-build": "ng build --configuration production --base-href '.'",
+    "github-deploy": "npx angular-cli-ghpages --dir=dist/CSCI4830-Angular --no-silent"
   },
   "private": true,
   "dependencies": {
