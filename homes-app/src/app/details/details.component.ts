@@ -24,6 +24,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
           <li>Does this location have laundry: {{housingLocation?.laundry}}</li>
         </ul>
       </section>
+      <button class="primary" type="button" (click)="deleteHome()">Remove Home Listing</button>
       <section class="listing-apply">
         <h2 class="section-heading">Apply to live here</h2>
         <form [formGroup]="applyForm" (submit)="submitApplication()">
@@ -51,10 +52,11 @@ export class DetailsComponent {
     lastName: new FormControl(''),
     email: new FormControl(''),
   });
+  housingLocationId: number;
 
   constructor() {
-    const housingLocationId = Number(this.route.snapshot.params['id']);
-    this.housingService.getHousingLocationById(housingLocationId)
+    this.housingLocationId = Number(this.route.snapshot.params['id']);
+    this.housingService.getHousingLocationById(this.housingLocationId)
     .then(housingLocation => {
       this.housingLocation = housingLocation;
     });
@@ -66,5 +68,9 @@ export class DetailsComponent {
       this.applyForm.value.lastName ?? "",
       this.applyForm.value.email ?? "",
     )
+  }
+
+  deleteHome() {
+    this.housingService.removeHome(this.housingLocationId);
   }
 }
